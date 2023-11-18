@@ -1,24 +1,14 @@
 #include "set.hpp"
 
-#include <algorithm>  //std::swap
-
-/*
-* std::size_t is defined in the C++ standard library
-* std::size_t is an unsigned integer type that can store the maximum size of any possible object
-* sizes are non-negative integers -- i.e. unsigned integer type
-*/
+#include <algorithm>
 
 
-// Initialize the counter of the total number of existing nodes
 std::size_t Set::Node::count_nodes = 0;
 
-// Used only for debug purposes
-// Return number of existing nodes
+
 std::size_t Set::get_count_nodes() {
     return Set::Node::count_nodes;
 }
-
-/* ************************************ */
 
 void Set::insert(Node *p, const int value) {
     Node *newPtr = new Node{value, p->next};
@@ -31,11 +21,11 @@ void Set::remove(Node *p) {
     counter--;
 }
 
-// Default constructor
+
 Set::Set() : head{new Node{}}, counter{0} {  // create the dummy node
 }
 
-// Constructor for creating a singleton {x}
+
 Set::Set(int x) : Set() {
     insert(head, x);
 }
@@ -61,7 +51,7 @@ Set::Set(const std::vector<int> &elements) : Set() {
     }
 }
 
-// copy constructor
+
 Set::Set(const Set &rhs) : Set() {
     Node *p = head;
     Node *otherPtr = rhs.head->next;
@@ -73,7 +63,7 @@ Set::Set(const Set &rhs) : Set() {
     counter = rhs.counter;
 }
 
-// Assignment operator: use copy-and-swap idiom
+
 Set &Set::operator=(Set rhs) {
     Set temp(rhs);
     auto swap = [this](Set &other) {
@@ -85,7 +75,7 @@ Set &Set::operator=(Set rhs) {
     return *this;
 }
 
-// Destructor: deallocate all nodes
+
 Set::~Set() {
     while (head != nullptr) {
         Node *temp = head;
@@ -251,6 +241,5 @@ std::ostream &operator<<(std::ostream &os, const Set &rhs) {
     return os;
 }
 
-/*******
-*** Private member functions ************/
+
 
